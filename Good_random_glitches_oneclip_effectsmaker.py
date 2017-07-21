@@ -22,6 +22,7 @@ path = '../shaker/'
 print(files_scanner(path))
 exec_numb = 5
 dur = []
+effects = ["", ]
 
 def randclip(maxclips):
 	return random.randint(0, maxclips)
@@ -50,7 +51,8 @@ def cut_logic(exec_numb):
 		# if i % 3 == 0:
 		
 		# textSub = TextClip('Lol')
-		clips[i] = add_still_placed_text(clips[i])
+		# clips[i] = add_still_placed_text(clips[i])
+		clips[i] = add_rand_placed_text(clips[i], 'kek')
 		# if i % random.randint(2, 3) == 0:
 		# 	clips[i] = time_symmetrize(clips[i])
 		# try:

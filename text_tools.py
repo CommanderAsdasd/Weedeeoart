@@ -2,18 +2,19 @@ import random
 from moviepy.video.fx.all import *
 from moviepy.editor import *
 
-# def add_rand_placed_text(clip):
-	# textString = TextClip('Lol',font='Amiri-regular',fontsize=120, stroke_color='black', color='white')
-	# # clipSize = []
-	# # clipSize.append(clip.w)
-	# # clipSize.append(clip.h)
-	# # xCoord = random.randint(0, clipSize[0])
-	# # yCoord = random.randint(0, clipSize[1])
-	# clipOut = (CompositeVideoClip([clip, textString.set_pos((10, 120))])
-					# .add_mask())
-	# return clipOut
+def add_rand_placed_text(clip, printText):
+	textString = TextClip(printText, font='Amiri-regular',fontsize=120, stroke_color='black', color='white')
+	# clipSize = []
+	# clipSize.append(clip.w)
+	# clipSize.append(clip.h)
+	xCoord = random.randint(0, clip.w)
+	yCoord = random.randint(0, clip.h)
+	clipOut = (CompositeVideoClip([clip,textString.set_pos((xCoord, yCoord))])
+					.add_mask()
+					.set_duration(clip.duration))
+	return clipOut
 
-def add_rand_placed_text(clip):
+def add_still_placed_text(clip):
 	textSub = TextClip('Lol',font='Amiri-regular',fontsize=120)
 	clipOut = (CompositeVideoClip([clip,textSub.set_pos((100,180))])
 	               .add_mask()
