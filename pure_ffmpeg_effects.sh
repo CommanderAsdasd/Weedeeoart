@@ -1,0 +1,1 @@
+ffmpeg -i $1 -vf "split [main][tmp]; [tmp] crop=iw:ih/2:0:0, vflip [flip]; [main][flip] overlay=0:H/2" -acodec aac -vcodec libx264 -strict experimental -ss $2  -t $3 -tune fastdecode $1+"_ffef_vegas-enc.mp4"
