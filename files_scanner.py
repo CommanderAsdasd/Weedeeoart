@@ -2,7 +2,7 @@ from moviepy.editor import *
 from moviepy.video.fx.all import *
 import os
 
-def files_scanner(path):
+def files_scanner_video(path):
 	files = os.listdir(path)
 	filesList = []
 	sourceFile = []

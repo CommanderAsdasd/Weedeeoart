@@ -45,19 +45,20 @@ def cut_logic(exec_numb):
 			# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
 			# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
 			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, random.uniform(1, 3)))
+			clips.append(imagesList[randclip(imagesCounter)])
 			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
 			# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
 	for i, objects in enumerate(clips):
 		pass
-		if i % 3 == 0:
-			clips[i] = supersample(clips[i], 1, 3)
+		# if i % 3 == 0:
+		# 	clips[i] = supersample(clips[i], 1, 3)
 	# 	clips[i] = mirror_x(clips[i])
 		# if i % random.randint(3, 4) == 0:
 		# 	clips[i] = speedx(clips[i], 0.5)
 		# if i % 3 == 0:
 		
 		# textSub = TextClip('Lol')
-		# clips[i] = add_still_placed_text(clips[i])
+		clips[i] = add_still_placed_text(clips[i])
 		# textIterate = random.randint(0, len(textEffects)-1)
 		# clips[i] = add_rand_placed_text(clips[i], textEffects[textIterate])
 		# if i % random.randint(2, 3) == 0:
