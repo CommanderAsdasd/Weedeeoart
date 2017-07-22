@@ -53,8 +53,8 @@ def cut_logic(exec_numb):
 		
 		# textSub = TextClip('Lol')
 		# clips[i] = add_still_placed_text(clips[i])
-		# textIterate = random.randint(0, len(textEffects)-1)
-		# clips[i] = add_rand_placed_text(clips[i], textEffects[textIterate])
+		textIterate = random.randint(0, len(textEffects)-1)
+		clips[i] = add_rand_placed_text(clips[i], textEffects[textIterate])
 		# if i % random.randint(2, 3) == 0:
 		# 	clips[i] = time_symmetrize(clips[i])
 		# try:

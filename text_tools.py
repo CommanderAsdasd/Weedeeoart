@@ -3,7 +3,7 @@ from moviepy.video.fx.all import *
 from moviepy.editor import *
 
 def add_rand_placed_text(clip, printText):
-	textString = TextClip(printText, font='Amiri-regular',fontsize=120, stroke_color='black', color='white')
+	textString = TextClip(printText, font='Amiri-regular',fontsize= 20, stroke_color='black', color='white')
 	# clipSize = []
 	# clipSize.append(clip.w)
 	# clipSize.append(clip.h)
