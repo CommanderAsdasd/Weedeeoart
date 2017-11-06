@@ -16,8 +16,7 @@ from generate_sequence import *
 from files_scanner import *
 from image_modules.testing_pillow import *
 from scipy import ndimage
-import numpy, mash
-
+import numpy, math
 
 
 class VideoEditor():
@@ -63,7 +62,23 @@ def PIL_filters(inpImage):
 	im_arr = im_arr.reshape((inpImage.size[1], inpImage.size[0], 3))
 	return im_arr
 
+def Shader_filters(inpImage):
+	im_array = inpImage
+	inpImage = Image.fromarray(inpImage, 'RGB')
+	
+	glEnable(GL_LIGHTING) 
+	texname = glGenTextures(1)
 
+	# glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+	glBindTexture(GL_TEXTURE_2D, texname)
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
+	#glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 10.0)
+	# glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, im.size[0], im.size[1], 0, GL_RGB, GL_UNSIGNED_BYTE, imdata)
+	# According to the OpenGL docs, we're not supposed to do this anymore in OpenGL 3+, and use glGenerateMipmap instead. Oh well, still works.
+	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, inpImage.size[0], inpImage.size[1], GL_RGB, GL_UNSIGNED_BYTE, im_array)
 
 def scroll(get_frame, t):
     """
@@ -100,7 +115,7 @@ def cut_logic(exec_numb):
 		# 	clips[i] = speedx(clips[i], 0.5)
 		# if i % 3 == 0:
 		# textSub = TextClip('Lol')
-		clips[i] = (clips[i].fl_image(PIL_filters))
+		clips[i] = (clips[i].fl_image(Shader_filters))
 		# pass
 		# if i % random.randint(2, 3) == 0:
 		# 	clips[i] = time_symmetrize(clips[i])
@@ -163,7 +178,7 @@ def concat_and_write(clips, exec_numb):
 		else:
 			print("game over")
 
-
+glEnable(GL_TEXTURE_2D)
 cut_logic(exec_numb)
 """
 # Чета он вызывает не то, какую-то хуйню, пытается из "instance" отнять in
