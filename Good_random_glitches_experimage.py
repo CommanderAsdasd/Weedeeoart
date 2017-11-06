@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 # C:/Python27/python.exe
-from moviepy.editor import *
-from moviepy.video.fx.all import *
+# from moviepy.editor import *
+# from moviepy.video.fx.all import *
 import random
 import time
-
+import pip
+# from pillow import imageio
 from generate_sequence import *
 from files_scanner import *
+from PIL import *
+# import imageio
+
+# pip.main(["install", "imageio"])
+# imageio.plugins.ffmpeg.download()
 
 class VideoEditor():
 	pass
@@ -32,31 +38,25 @@ def cut_logic(exec_numb):
 	clipsList = files_scanner_video(path)
 	clipsCounter = len(clipsList) - 1
 	for i, objects in enumerate(clipsList[::1]):
-		for j in range(0, 4):
 		# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
-			# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 4))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 3)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 3))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 3)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 3)))
-			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
-	# for i, objects in enumerate(clips):
-	# if i % 3 == 0:
-	# 	clips[i] = mirror_x(clips[i])
-		# if i % random.randint(3, 4) == 0:
-		# 	clips[i] = speedx(clips[i], 0.5)
-		if i % random.randint(2, 3) == 0:
-			clips[i] = time_symmetrize(clips[i])
+		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
+		
+		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
+		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, i + random.uniform(1, 2)))
+		# # clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
+		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
+		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
+		# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
+	for i, objects in enumerate(clips):
+		clips[i] = fl_image()
+		# if i % 3 == 0:
+			
+	# 	if i % random.randint(1, 3) == 0:
+	# 		if 1 == random.randint(1, 2):
+	# 			clips[i] = speedx(clips[i], 4)
+	# 		else:
+	# 			clips[i] = speedx(clips[i], random.randint(1, 10) * 0.1)
+				
 		# try:
 		# 	if i < len(clips)-5:
 		# 		clips.append(clips_array([[clips[i], clips[i+1]],
@@ -86,10 +86,25 @@ def resulst_store(clips, exec_numb):
 # 		randpoints.append(point2)
 # 		print(randpoints)
 
+def targets(x,y):
+    yield (x,y) # Center
+    yield (x+1,y) # Left
+    yield (x-1,y) # Right
+    yield (x,y+1) # Above
+    yield (x,y-1) # Below
+    yield (x+1,y+1) # Above and to the right
+    yield (x+1,y-1) # Below and to the right
+    yield (x-1,y+1) # Above and to the left
+    yield (x-1,y-1) # Below and to the left
 
 
-
-
+def changeImage():
+	for x in range(width):
+	    for y in range(height):
+	        px = pixels[x][y]
+	        if px[0] == 255 and px[1] == 255 and px[2] == 255:
+	            for i,j in targets(x,y):
+	                newpixels[i][j] = replacementColor
 
 
 
@@ -106,8 +121,7 @@ def concat_and_write(clips, exec_numb):
 	try:
 		clipOut = concatenate_videoclips(clips, method='compose')
 		clipOut.write_videofile("./" + write_data + "-out.mp4",fps=25)
-	except Exception as e:
-		print(str(e))
+	except Exception:
 		print("An error occured, try {} times".format(exec_numb))
 		if exec_numb > 0:
 			exec_numb -= 1

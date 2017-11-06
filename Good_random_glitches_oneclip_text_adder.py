@@ -19,18 +19,27 @@ def test():
 
 # =======================================================================OUT====================================
 path = '../shaker/'
-print(files_scanner(path))
+print(files_scanner_video(path))
 exec_numb = 5
 dur = []
-textEffects = ["Blur", "Mirror", "BlackCircle", "Fractal", "DoubleFace", "Glitchface", ]
+# Такую хуйню можно слепить воедино сделав панно из идей и объединять их, можно даже делать им разноцветный бэкграунд
+textEffects = ["Blur", "Mirror", "BlackCircle", "Fractal", "DoubleFace", "Glitchface", "crystallize", "маскирование фона", "pixelate", "face swap", "Заедание части", "Многократная картинка", "мультирендеринг", "телевизор", "Вылезание персонажа", "Datamosh", "Reflecting", "Текст программы", "EyeSize char"]
+audioEffectsText = ["8bit", "EarRape", "Somatik", "Музпуп", "Звук удара", "Ретровейв"]
+sourceParts = ["AVGN in TV", "Крутое пике", "Коммандор-зайчик", "Пакет с дерьмом", "Смешивание персонажей", "dyhanie.mp4", "Заедание джойстика", "Rebyata.mp4", "Ожидал внезапных ударов", "синтезаторы", "Закон не позволяет реверсить", "Либо - движение утки"]
+memesText = ["Pepe", "БлэдНэвэльный", "У меня лапки"]
+ideasAdder = ["Скопировать идеи в такие листы", "Смешивать программу со списком идей", "Список функций и частей программы перемешивать", "Сделать изображение меньше относительно видеоклипа"]
 
 def randclip(maxclips):
 	return random.randint(0, maxclips)
 
+def add_text(textList):
+	textIterate = random.randint(0, len(textEffects)-1)
+	clips[i] = add_rand_placed_text(clips[i], textList[textIterate])
+
 def cut_logic(exec_numb):
 	clips = []
 	print(clips)
-	clipsList = files_scanner(path)
+	clipsList = files_scanner_video(path)
 	clipsCounter = len(clipsList) - 1
 	for i, objects in enumerate(clipsList[::1]):
 		for j in range(0,3):
@@ -43,9 +52,9 @@ def cut_logic(exec_numb):
 			clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
 			# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
 	for i, objects in enumerate(clips):
-		pass
-		if i % 3 == 0:
-			clips[i] = supersample(clips[i], 1, 3)
+		# pass
+		# if i % 3 == 0:
+			# clips[i] = supersample(clips[i], 1, 3)
 	# 	clips[i] = mirror_x(clips[i])
 		# if i % random.randint(3, 4) == 0:
 		# 	clips[i] = speedx(clips[i], 0.5)
@@ -53,8 +62,16 @@ def cut_logic(exec_numb):
 		
 		# textSub = TextClip('Lol')
 		# clips[i] = add_still_placed_text(clips[i])
-		textIterate = random.randint(0, len(textEffects)-1)
-		clips[i] = add_rand_placed_text(clips[i], textEffects[textIterate])
+
+
+		textIterate = random.randint(0, len(sourceParts)-1)
+		clips[i] = add_rand_placed_text(clips[i], sourceParts[textIterate])
+		textIterate = random.randint(0, len(audioEffectsText)-1)
+		clips[i] = add_rand_placed_text(clips[i], audioEffectsText[textIterate])
+		textIterate = random.randint(0, len(memesText)-1)
+		clips[i] = add_rand_placed_text(clips[i], memesText[textIterate])
+		textIterate = random.randint(0, len(memesText)-1)
+		clips[i] = add_rand_placed_text(clips[i], ideasAdder[textIterate])
 		# if i % random.randint(2, 3) == 0:
 		# 	clips[i] = time_symmetrize(clips[i])
 		# try:

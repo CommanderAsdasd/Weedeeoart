@@ -9,14 +9,48 @@ def generate_rand_sequence(processClip, minLength, clipLength):
 	duration = processClip.duration
 	if duration < clipLength:
 		clipLength = duration
-	point1 = random.uniform(minLength, duration)
-	point2 = point1 + clipLength
-	points.append(point1)
-	points.append(point2)
+	startPoint = random.uniform(minLength, duration)
+	endPoint = startPoint + clipLength
+	points.append(startPoint)
+	points.append(endPoint)
 	print(points)
 	sequence = processClip.subclip(min(points), max(points))
-
 	return sequence
+
+def generate_rand_sequence(processClip, minLength, clipLength):
+	'''returns video objects instance'''
+	points = []
+	duration = processClip.duration
+	if duration < clipLength:
+		clipLength = duration
+	startPoint = random.uniform(minLength, duration)
+	endPoint = startPoint + clipLength
+	points.append(startPoint)
+	points.append(endPoint)
+	print(points)
+	sequence = processClip.subclip(min(points), max(points))
+	return sequence
+
+def generate_rand_inPlace_sequence(processClip, minLength, clipLength, times):
+	points = []
+	clips = []
+	duration = clipLength
+	if duration > processClip.duration:
+		clipLength = duration
+	for i in range(times):
+		startPoint = random.uniform(minLength, duration)
+		endPoint = startPoint + clipLength
+		points.append(startPoint)
+		points.append(endPoint)
+		print(points)
+		clips.append(processClip.subclip(min(points), max(points)))
+	# sequence = concatenate_videoclips(clips, method='compose')
+	# for i, objects in enumerate(clips):
+		return clips
+
+
+
+
 
 def generate_sequence(processClip, timecodes):
 	'''retunrs list of video file objects'''

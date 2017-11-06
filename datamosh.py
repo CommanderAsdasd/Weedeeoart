@@ -1,7 +1,14 @@
-from pymosh import Index
-from pymosh.mpeg4 import is_iframe
+try:
+	from pymosh import Index
+	from pymosh.mpeg4 import is_iframe
+except Exception as err:
+	print(str(err) + " - lets's trying install dependencies")
+	import pip
+	pip.main(["install", "pymosh"])
 import sys
 import time
+
+
 
 def mosh(filename):
 	f = Index(filename)
@@ -28,16 +35,17 @@ def mosh(filename):
 		stream.replace(newstream)
 		# Call rebuild to recombine the modified streams and perform any other
 		# maintenance the file format needs for clean output.
-		f.rebuild()
-		print(stream)
-		# Finally, write the modified file to stdout.
-		# f.write(sys.stdout)
-		write_data = time.strftime("%I%M%S")
-		f.write("./" + write_data + "-dtmsh-out.mp4")
+	f.rebuild()
+	print(stream)
+	# Finally, write the modified file to stdout.
+	f.write(sys.stdout)
+	write_data = time.strftime("%I%M%S")
+	# f.write("./" + write_data + "-dtmsh-out.avi")
 
 
 if __name__ == '__main__':
 	# if len(sys.argv) < 2:
 	# 	print "Usage: mosh.py filename"
 	# sys.exit(1)
-	mosh("020444.avi")
+	# сюда можно вкорячить имя файла, чтобы не передавать его аргументом
+	mosh(sys.argv[1])

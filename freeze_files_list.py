@@ -18,12 +18,12 @@ def test():
 # resize()
 
 path = '../shaker/'
-print(files_scanner(path))
+print(files_scanner_video(path))
 write_data = time.strftime("%I%M%S")
 print(write_data)
 
 clips = []
-clipsList = files_scanner(path)
+clipsList = files_scanner_video(path)
 print(clips)
 dur = []
 
@@ -37,20 +37,20 @@ def freeze_files_list(clipsList):
 		rand = randee(i)
 		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.1], 10))
 		rand = randee(i)
-		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.1], 10))
+		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.2], 10))
 		rand = randee(i)
-		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.1], 10))
+		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.3], 10))
 		rand = randee(i)
 		clips.extend(generate_freeze(clipsList[i], [rand, rand+0.1], 10))
 	return clips
 
 ''' used for applying mirror'''
 clips = freeze_files_list(clipsList)
-for i, objects in enumerate(clips):
-	if i % 3 == 0:
-		clips[i] = mirror_x(clips[i])
-	if i % 2 == 0:
-		clips[i] = mirror_y(clips[i])
+# for i, objects in enumerate(clips):
+# 	if i % 3 == 0:
+# 		clips[i] = mirror_x(clips[i])
+# 	if i % 2 == 0:
+# 		clips[i] = mirror_y(clips[i])
 
 print(clips)
 clipOut = concatenate_videoclips(clips, method='compose')

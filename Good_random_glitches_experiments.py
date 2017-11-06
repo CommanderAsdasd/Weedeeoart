@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 # C:/Python27/python.exe
-from moviepy.editor import *
-from moviepy.video.fx.all import *
+# from moviepy.editor import *
+# from moviepy.video.fx.all import *
 import random
 import time
-
+import pip
+# from pillow import imageio
 from generate_sequence import *
 from files_scanner import *
+# import imageio
+
+# pip.main(["install", "imageio"])
+# imageio.plugins.ffmpeg.download()
 
 class VideoEditor():
 	pass
@@ -17,7 +22,7 @@ def test():
 
 # =======================================================================OUT====================================
 path = '../shaker/'
-print(files_scanner(path))
+print(files_scanner_video(path))
 exec_numb = 5
 
 # clips.append(generate_rand_sequence(clipsList[0], 5, 4))
@@ -29,7 +34,7 @@ def randclip(maxclips):
 def cut_logic(exec_numb):
 	clips = []
 	print(clips)
-	clipsList = files_scanner(path)
+	clipsList = files_scanner_video(path)
 	clipsCounter = len(clipsList) - 1
 	for i, objects in enumerate(clipsList[::1]):
 		# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
@@ -42,15 +47,15 @@ def cut_logic(exec_numb):
 		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
 		# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
 	for i, objects in enumerate(clips):
-		if i % 3 == 0:
+		if i % random.randint(1, 5) == 0:
 			clips[i] = mirror_x(clips[i])
-		if i % random.randint(3, 4) == 0:
+		if i % random.randint(1, 4) == 0:
 			clips[i] = time_symmetrize(clips[i])
-	# 	if i % random.randint(1, 3) == 0:
-	# 		if 1 == random.randint(1, 2):
-	# 			clips[i] = speedx(clips[i], 4)
-	# 		else:
-	# 			clips[i] = speedx(clips[i], random.randint(1, 10) * 0.1)
+		if i % random.randint(3, 6) == 0:
+			# if 1 == random.randint(1, 2):
+				# clips[i] = speedx(clips[i], 4)
+			clips[i] = speedx(clips[i], random.randint(1, 10) * 0.5)
+			# else:
 				
 		# try:
 		# 	if i < len(clips)-5:
@@ -100,9 +105,9 @@ def concat_and_write(clips, exec_numb):
 	print(write_data)
 	try:
 		clipOut = concatenate_videoclips(clips, method='compose')
-		clipOut.write_videofile("./" + write_data + "-out.mp4",fps=25)
-	except Exception:
-		print("An error occured, try {} times".format(exec_numb))
+		clipOut.write_videofile("./output_video/" + write_data + "-out.mp4",fps=25)
+	except Exception as err:
+		print(str(err) + "\n An error occured, try {} times".format(exec_numb))
 		if exec_numb > 0:
 			exec_numb -= 1
 			cut_logic(exec_numb)
