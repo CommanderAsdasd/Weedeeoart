@@ -16,7 +16,7 @@ from generate_sequence import *
 from files_scanner import *
 from image_modules.testing_pillow import *
 from scipy import ndimage
-import numpy, mash
+import numpy, math
 
 
 
@@ -55,13 +55,17 @@ def replace_pixels(inpImage):
 	# break
 	# return image
 
-def PIL_filters(inpImage):
+def PIL_filters(inpImage, countClip):
+	# if countClip > 0 and countClip > countClip+1:
+	filters = ["BLUR", "CONTOUR", "DETAIL", "EDGE_ENHANCE", "EDGE_ENHANCE_MORE", "EMBOSS", "FIND_EDGES", "SMOOTH", "SMOOTH_MORE", "SHARPEN"]
+	# randFilter = random.choise(filters)
+	randFilter = getattr(ImageFilter, random.choice(filters))
 	im_array = inpImage
 	inpImage = Image.fromarray(inpImage, 'RGB')
-	inpImage = inpImage.filter(ImageFilter.SHARPEN)
-	im_arr = numpy.fromstring(inpImage.tobytes(), dtype=np.uint8)
-	im_arr = im_arr.reshape((inpImage.size[1], inpImage.size[0], 3))
-	return im_arr
+	inpImage = inpImage.filter(randFilter)
+	imArr = numpy.fromstring(inpImage.tobytes(), dtype=np.uint8)
+	imArr = imArr.reshape((inpImage.size[1], inpImage.size[0], 3))
+	return imArr
 
 
 
@@ -87,23 +91,23 @@ def cut_logic(exec_numb):
 		# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
 			# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 4))
 		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, random.uniform(1, 4)))
-			# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-			# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
-			# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, random.uniform(1, 3)))
+		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
+		clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
+		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, random.uniform(1, 3)))
 			# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
 			# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
 	for i, objects in enumerate(clips):
 
-	# if i % 3 == 0:
-	# 	clips[i] = mirror_x(clips[i])
-		# if i % random.randint(3, 4) == 0:
-		# 	clips[i] = speedx(clips[i], 0.5)
-		# if i % 3 == 0:
-		# textSub = TextClip('Lol')
-		clips[i] = (clips[i].fl_image(PIL_filters))
-		# pass
-		# if i % random.randint(2, 3) == 0:
-		# 	clips[i] = time_symmetrize(clips[i])
+		if i % 3 == 0:
+			clips[i] = mirror_x(clips[i])
+			if i % random.randint(3, 4) == 0:
+				clips[i] = speedx(clips[i], 0.5)
+			if i % random.randint(1, 5) == 0:
+			# textSub = TextClip('Lol')
+				clips[i] = (clips[i].fl_image(PIL_filters))
+			# pass
+			if i % random.randint(2, 3) == 0:
+				clips[i] = time_symmetrize(clips[i])
 		# try:
 		# 	if i < len(clips)-5:
 		# 		clips.append(clips_array([[clips[i], clips[i+1]],
