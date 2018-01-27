@@ -32,49 +32,61 @@ def randclip(maxclips):
 
 
 def cut_logic(exec_numb):
-    clips = []
-    clipsAudio = []
-    print(clips)
+    pieces = []
+    piecesAudio = []
     clipsList = files_scanner_video(path)
     clipsAudioList = files_scanner_audio(pathAudio)
     print(clipsAudioList)
     clipsCounter = len(clipsList) - 1
-    clipsAudioCounter = len(clipsList) - 1
-    for i, objects in enumerate(clipsList[::1]):
-        for j in range(0, 4):
-        	clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, random.uniform(1, 4)))
-        	clipsAudio.append(generate_rand_sequence_audio(clipsAudioList[randclip(clipsAudioCounter)], 0, random.uniform(1, 1.5)))
-        	print(clips)
-        	print(clipsAudio)
+    clipsAudioCounter = len(clipsAudioList) - 1
+    # iterate over
+    for i in range(0,2):
+    	piece_length = random.uniform(1, 4)
 
-        if i % random.randint(2, 4) == 0:
-            # clips[random.randint(0,clipsAudioCounter)] = time_symmetrize(clips[i])
-            pointer = random.randint(0,clipsCounter)
-            # clips[pointer] = clips[pointer].set_audio(clipsAudio[random.randint(0,clipsAudioCounter)])
+    for i, objects in enumerate(clipsAudioList[::1]):
+    	for j in range(0, 2):
+	    	piecesAudio.append(generate_rand_sequence_audio(clipsAudioList[randclip(clipsAudioCounter)], 0, piece_length))
+
+    	
+    for i, objects in enumerate(clipsList[::1]):
+        for j in range(0, 2):
+        	pieces.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, piece_length))
+        	# print(pieces)
+        	# print(piecesAudio)
+
+        # if i % random.randint(0, 4) == 0:
+        # if i %  == 0:
+            # 
+	        pointer = random.randint(0, len(pieces) - 1)
+	        pointerAudio = piecesAudio[random.randint(0, len(piecesAudio) - 1)]
+	        # pieces[1] = time_symmetrize(pieces[1])
+	        pieces[pointer] = pieces[pointer].set_audio(pointerAudio)
+	        pointer = random.randint(0, len(pieces) - 1)
+	        # print(pointer)
+	        # print(clipsCounter)
+	        # print("Debug 4-07: ", pointer, pointerAudio)
             # print(clips)
 
-    concat_and_write(clips, clipsAudio, exec_numb)
+    concat_and_write(pieces, exec_numb)
 
 
 def resulst_store(clips, exec_numb):
     pass
 
-def concat_and_write(clips, clipsAudio, exec_numb):
+def concat_and_write(clips, exec_numb):
     write_data = time.strftime("%I%M%S")
     print(write_data)
-    # try:
-    clipOut = concatenate_videoclips(clips, method='compose').set_audio(clipsAudio[0])
-    print("debug3-41: ", clipOut)
-    print(dir(clipOut))
-    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)
-    # except Exception as e:
-    #     print(str(e))
-    #     print("An error occured, try {} times".format(exec_numb))
-    #     if exec_numb > 0:
-    #         exec_numb -= 1
-    #         cut_logic(exec_numb)
-    #     else:
-    #         print("game over")
+    try:
+	    clipOut = concatenate_videoclips(clips, method='compose')
+	    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)
+    except Exception as e:
+        print(str(e))
+        print("An error occured, try {} times".format(exec_numb))
+        if exec_numb > 0:
+            exec_numb -= 1
+            cut_logic(exec_numb)
+        else:
+            print("game over")
 
 
 cut_logic(exec_numb)
