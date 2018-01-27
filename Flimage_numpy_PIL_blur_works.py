@@ -55,7 +55,7 @@ def replace_pixels(inpImage):
 	# break
 	# return image
 
-def PIL_filters(inpImage, countClip):
+def PIL_filters(inpImage):
 	# if countClip > 0 and countClip > countClip+1:
 	filters = ["BLUR", "CONTOUR", "DETAIL", "EDGE_ENHANCE", "EDGE_ENHANCE_MORE", "EMBOSS", "FIND_EDGES", "SMOOTH", "SMOOTH_MORE", "SHARPEN"]
 	# randFilter = random.choise(filters)

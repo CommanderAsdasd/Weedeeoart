@@ -76,9 +76,10 @@ def Shader_filters(inpImage):
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)
 	#glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 10.0)
-	# glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, im.size[0], im.size[1], 0, GL_RGB, GL_UNSIGNED_BYTE, imdata)
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, inpImage.size[0], inpImage.size[1], 0, GL_RGB, GL_UNSIGNED_BYTE, im_array)
 	# According to the OpenGL docs, we're not supposed to do this anymore in OpenGL 3+, and use glGenerateMipmap instead. Oh well, still works.
-	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, inpImage.size[0], inpImage.size[1], GL_RGB, GL_UNSIGNED_BYTE, im_array)
+	# gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, inpImage.size[0], inpImage.size[1], GL_RGB, GL_UNSIGNED_BYTE, im_array)
+	
 
 def scroll(get_frame, t):
     """

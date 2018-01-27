@@ -1,0 +1,372 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Coun",
+				"counter\tPyQt Functions"
+			],
+			[
+				"print",
+				"print\tPyQt Functions"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					""
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Re-run sketch"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch (Processing 3 only)"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Run sketch fullscreen"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Export sketch as application"
+				],
+				[
+					"Packages/Processing/Build Systems/Processing.sublime-build",
+					"Kill running sketches"
+				]
+			],
+			[
+				"Packages/Processing/Build Systems/Processing.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "ter",
+		"selected_items":
+		[
+			[
+				"ter",
+				"Terminal: Open"
+			],
+			[
+				"te",
+				"Terminal: Open"
+			],
+			[
+				"term",
+				"Terminal: Open"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"hex",
+				"HexViewer: Toggle Hex View"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"re",
+				"File: Rename"
+			],
+			[
+				"process",
+				"Processing: New Java Ant project"
+			],
+			[
+				"pr",
+				"Set Syntax: Processing"
+			],
+			[
+				"processin",
+				"Set Syntax: Processing"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax",
+				"Set Syntax: Python"
+			],
+			[
+				"rename",
+				"File: Rename"
+			]
+		],
+		"width": 440.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/C/Users/oneyro/AppData/Roaming/Sublime Text 3/Packages/Terminal/Terminal.sublime-settings",
+		"/C/Users/oneyro/git/Headless-rendering-with-python/main_multisample.py",
+		"/C/Python34/Lib/site-packages/ModernGL/ModernGL.cp35-win32.pyd",
+		"/C/Python34/Lib/site-packages/ModernGL/__pycache__/__init__.cpython-34.pyo",
+		"/F/Videos/Shortly_say/video_shaker/output_video/encoded/+galina.mp4+_vegas-enc - Copy.mp4",
+		"/F/Videos/krov_i_beton/Ublydok - Copy.mp4",
+		"/F/Videos/Shortly_say/video_shaker/output_video/5_tabletok_piva_5_butylok_vodki.mp4",
+		"/F/Videos/Shortly_say/video_shaker/files_scanner.py",
+		"/F/Dropbox/scripts/Processing/image_processing_learn/image_processing_learn.pde",
+		"/F/Dropbox/scripts/Processing/Lighting/Lighting.pde",
+		"/F/Dropbox/scripts/Processing/Image_processing/Image_processing.pde",
+		"/F/Dropbox/scripts/Python/GUI/tkinter_test.py",
+		"/F/Videos/ecoding/del-i-frames.sh",
+		"/F/Videos/ecoding/encoding-to-vegas.sh",
+		"/F/Videos/ecoding/extract-i-frames.sh",
+		"/F/Videos/Shortly_say/video_shaker/datamosh.py",
+		"/F/python_docker/data/moviepy-starwars.py",
+		"/F/Videos/Shortly_say/video_shaker/freeze_files_list.py",
+		"/C/Python27/Lib/site-packages/moviepy/config.py",
+		"/C/Python27/Lib/site-packages/moviepy/__init__.py",
+		"/F/python_docker/.bashrc",
+		"/F/Program_noncritical/Renoise 2.8.0/Readme.txt",
+		"/F/python_docker/data/moviepy_starwars.py",
+		"/F/python_docker/data/generate_sequence.py",
+		"/F/python_docker/data/files_scanner.py",
+		"/F/python_docker/data/Good_random_glitches_experiments.py",
+		"/F/Down loads/Bonzomatic_W64_2017-04-08/README.md",
+		"/C/Users/oneyro/git/Bonzomatic/_package.x64/README.md",
+		"/F/Dropbox/scripts/Processing/movie_vertext_rewinding/data/vertTexCoord.st",
+		"/C/Users/oneyro/git/pshader-tutorials/intro/Ex_05_1_texture/data/texvert.glsl",
+		"/C/Users/oneyro/git/pshader-tutorials/intro/Ex_05_1_texture/data/texfrag.glsl",
+		"/F/Dropbox/scripts/Processing/movie_vertext_rewinding/Data/shadertoy.glsl",
+		"/F/Down loads/Sony Vegas Pro v11.0.520 x86 Plugins Portable ENG_RUS/Readme.txt",
+		"/F/Videos/Shortly_say/video_shaker/Good_random_glitches_proto(works).py",
+		"/F/Videos/Shortly_say/video_shaker/Good_random_glitches_experiments.py",
+		"/F/Down loads/Magix Vegas Pro 14 Build 201 x64 Ukr/proDAD Mercalli V4 4.0.470.1 x64 VEGAS Pro 14/Readme.txt",
+		"/F/Videos/Shortly_say/video_shaker/Good_random_glitches_experimage.py",
+		"/F/Dropbox/scripts/Processing/Video_texture/Video_texture.pde",
+		"/F/Videos/ecoding/encoding.sh",
+		"/F/Videos/Shortly_say/video_shaker/Good_random_glitches_oneclip_wordmix.py",
+		"/F/Dropbox/scripts/Python/Py_opengl/py_openGL_xmas.py",
+		"/F/Videos/Shortly_say/Good_random_glitches_oneclip_fl_image.py",
+		"/F/Videos/Shortly_say/video_shaker/Good_random_glitches_oneclip_fl_image.py",
+		"/F/Down loads/Boris Continuum Complete 10.0.2 Win64/readme.txt",
+		"/C/Users/oneyro/git/Bonzomatic/CMakeLists.txt",
+		"/G/ARCH/BOOT/SYSLINUX/ARCHISO.CFG",
+		"/G/ISOLINUX/syslinux.cfg",
+		"/F/Dropbox/scripts/Python/Py_opencv/install_opencv.py",
+		"/F/Down loads/print.py",
+		"/F/Down loads/Chasing_Amy_1997_RUS.srt",
+		"/F/Dropbox/scripts/Python/text_analisis/Wavelet",
+		"/F/Dropbox/scripts/Python/Frame_comber/frame_comber.py",
+		"/F/Videos/Shortly_say/video_shaker/quine",
+		"/F/Videos/Shortly_say/video_shaker/exceptionQuine.py",
+		"/F/Down loads/Magix Vegas Pro 14 Build 201 x64 Ukr/ReadMe.txt",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/F/Dropbox/scripts/Processing/PIxels_moving/PIxels_moving.pde",
+		"/F/Dropbox/scripts/Python/text_analisis/coounter.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/buildHouse.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/buildHouse.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/magicBridge.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/Horse.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/AlienInvasion.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/MinecraftPyramids.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/CraftyCrossing.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/CraftyCrossingHardware.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/lift.py",
+		"/F/Down loads/AIMStarterKitPC (2)/AdventuresInMinecraft/MyAdventures/mcpi/block.py",
+		"/C/Python27/Lib/HTMLParser.py",
+		"/C/Python27/Lib/site-packages/html.py",
+		"/F/Dropbox/scripts/Python/text_analisis/smartobjects-ps.txt",
+		"/F/Dropbox/scripts/Python/text_analisis/VCO.txt",
+		"/F/Down loads/Dune Messiah.txt",
+		"/G/Frenk_Herbert__Dune_Messiah.txt",
+		"/C/Users/oneyro/AppData/Local/Temp/Temp1_Herbert Frank. Dune Messiah - royallib.com.txt.zip/Herbert Frank. Dune Messiah - royallib.ru.txt",
+		"/F/Down loads/CodeFiles/Adventure8/WoodenHorse.py",
+		"/F/Down loads/CodeFiles/Adventure1/HelloMinecraftWorld.py",
+		"/F/Down loads/CodeFiles/Adventure3/buildHouse.py"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "D:\\Videos\\Shortly_say\\video_shaker"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 297.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "Packages/Python 3/Python3.sublime-build",
+	"project": "",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 393.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

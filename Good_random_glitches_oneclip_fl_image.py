@@ -5,14 +5,24 @@ from moviepy.video.fx.all import *
 from moviepy.video.VideoClip import *
 import random
 import time
+import wand
+# import cStringIO
+# import skimage.io
 
 # from moviepy_effetcs import *
 from generate_sequence import *
 from files_scanner import *
 from image_modules.testing_pillow import *
 from scipy import ndimage
+# from wand.image import Image
+
 import numpy
 
+# os.environ["MAGICK_HOME"] = "C:\\Program Files\\ImageMagick-6.9.9-Q8\\include"
+
+print( os.environ.get('MAGICK_HOME'))
+
+print wand
 class VideoEditor():
 	pass
 
@@ -30,7 +40,7 @@ dur = []
 
 def invert_green_blue(inpImage):
 	# print(type(image))
-	# for i in image:
+	# for i in image
 	# 	if image.any() % random.randint(2,6) == 0:
 	# 		image.reshape()
 	# numpy.set_printoptions(threshold=numpy.nan)
@@ -43,6 +53,14 @@ def invert_green_blue(inpImage):
 	return inpImage
 	# break
 	# return image
+
+def cas(liquid):
+	print(liquid)
+	# liquid = Image.fromarray(liquid, 'RGB')
+	# liquid = liquid.liquid_rescale()
+	# liquid.liquid_rescale(234, 234)
+	# return liquid.clone()
+
 
 def scroll(get_frame, t):
     """
@@ -79,7 +97,7 @@ def cut_logic(exec_numb):
 		# 	clips[i] = speedx(clips[i], 0.5)
 		# if i % 3 == 0:
 		# textSub = TextClip('Lol')
-		clips[i] = (clips[i].fl_image(invert_green_blue))
+		clips[i] = (clips[i].fl_image(cas))
 		# pass
 		# if i % random.randint(2, 3) == 0:
 		# 	clips[i] = time_symmetrize(clips[i])

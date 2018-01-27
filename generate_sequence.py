@@ -49,9 +49,6 @@ def generate_rand_inPlace_sequence(processClip, minLength, clipLength, times):
 		return clips
 
 
-
-
-
 def generate_sequence(processClip, timecodes):
 	'''retunrs list of video file objects'''
 	points = []
@@ -110,12 +107,21 @@ def generate_ffmpeg_cutter_sequence(processClip, minLength, clipLength, duration
 	points.append(point2)
 	return points
 
+def generate_rand_sequence_audio(processAudioClip, minLength, clipLength):
+	'''returns audio objects instance'''
+	points = []
+	duration = processAudioClip.duration
+	if duration < clipLength:
+		clipLength = duration
+	startPoint = random.uniform(minLength, duration)
+	endPoint = startPoint + clipLength
+	points.append(startPoint)
+	points.append(endPoint)
+	print(points)
+	sequence = processAudioClip.subclip(min(points), max(points))
+	return sequence
 
-	'''
-	# Надо сделать так, чтобы секвенция принимала лист из точек и генерила с ним отрывки. Если количество нечётное, последняя точка обрезается. Если точка больше duration, её тоже не берём. 
-	- 
 
-	'''
 if __name__ == "__main__":
 	# generate_sequence(10, [20, 10])
 	print("use it in script!")
