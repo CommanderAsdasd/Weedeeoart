@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# C:/Python27/python.exe
 try:
 	from pymosh import Index
 	from pymosh.mpeg4 import is_iframe

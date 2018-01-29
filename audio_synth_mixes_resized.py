@@ -44,12 +44,12 @@ def cut_logic(exec_numb):
     for i in range(0,2):
     	pieceLength = random.uniform(1, 2)
 
-    for i, objects in enumerate(clipsAudioList[::1]):
+    for i, objects in enumerate(clipsAudioList[::4]):
     	for j in range(0, 2):
 	    	piecesAudio.append(generate_rand_sequence(clipsAudioList[randclip(clipsAudioCounter)], minLength=4, clipLength=pieceLength))
 
     	
-    for i, objects in enumerate(clipsList[::1]):
+    for i, objects in enumerate(clipsList[::3]):
         for j in range(0, 2):
         	pieces.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], minLength=4, clipLength=pieceLength))
         	# print(pieces)
@@ -77,6 +77,8 @@ def resulst_store(clips, exec_numb):
 def concat_and_write(clips, exec_numb):
     write_data = time.strftime("%I%M%S")
     print(write_data)
+    for i, clip in enumerate(clips):
+    	clips[i] = clips[i].resize( (1280, 1024) )
     try:
 	    clipOut = concatenate_videoclips(clips, method='compose')
 	    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)

@@ -1,0 +1,3 @@
+import wand
+
+print(wand)

@@ -33,3 +33,6 @@ def files_scanner_images(path, dur):
 	for i, filenames in enumerate(os.listdir(path)):
 		filesList.append(ImageClip(os.path.join(path, filenames), ismask=False, transparent=True, fromalpha=False, duration=dur))
 	return filesList
+
+if __name__ == "__main__":
+	print("Use it in script!")

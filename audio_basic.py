@@ -24,7 +24,7 @@ print(write_data)
 clips = []
 for i, objects in enumerate(files_scanner_audio(path)):
 	for j in range(0,3):
-		clips.append(generate_sequence(files_scanner_audio(path)[i], i + random.uniform(0, 4)))
+		clips.append(generate_sequence(files_scanner_audio(path)[i], i + random.uniform(0, 10)))
 	for n, objects in enumerate(files_scanner_audio(path)):
 		if n < len(files_scanner_audio(path)):
 			clips.append(generate_sequence(files_scanner_audio(path)[n-1], i + random.uniform(0, 3)))

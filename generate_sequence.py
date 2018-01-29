@@ -3,19 +3,19 @@ import random
 from moviepy.editor import *
 from moviepy.video.fx.all import *
 
-def generate_rand_sequence(processClip, minLength, clipLength):
-	'''returns video objects instance'''
-	points = []
-	duration = processClip.duration
-	if duration < clipLength:
-		clipLength = duration
-	startPoint = random.uniform(minLength, duration)
-	endPoint = startPoint + clipLength
-	points.append(startPoint)
-	points.append(endPoint)
-	print(points)
-	sequence = processClip.subclip(min(points), max(points))
-	return sequence
+# def generate_rand_sequence(processClip, minLength, clipLength):
+# 	'''returns video objects instance'''
+# 	points = []
+# 	duration = processClip.duration
+# 	if duration < clipLength:
+# 		clipLength = duration
+# 	startPoint = random.uniform(minLength, clipLength)
+# 	endPoint = startPoint + clipLength
+# 	points.append(startPoint)
+# 	points.append(endPoint)
+# 	print(points)
+# 	sequence = processClip.subclip(min(points), max(points))
+# 	return sequence
 
 def generate_rand_sequence(processClip, minLength, clipLength):
 	'''returns video objects instance'''

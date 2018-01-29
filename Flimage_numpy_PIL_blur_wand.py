@@ -56,11 +56,8 @@ def replace_pixels(inpImage):
 	# return image
 
 def PIL_framerand_filters(inpImage):
-	# print(type(inpImage))
 	print("Effecting")
-	# if countClip > 0 and countClip > countClip+1:
 	filters = ["BLUR", "CONTOUR", "DETAIL", "EDGE_ENHANCE", "EDGE_ENHANCE_MORE", "EMBOSS", "FIND_EDGES", "SMOOTH", "SMOOTH_MORE", "SHARPEN"]
-	# randFilter = random.choise(filters)
 	randFilter = getattr(ImageFilter, random.choice(filters))
 	im_array = inpImage
 	inpImage = Image.fromarray(inpImage, 'RGB')
