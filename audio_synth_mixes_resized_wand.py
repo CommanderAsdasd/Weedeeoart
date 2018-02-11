@@ -110,22 +110,5 @@ def cut_logic(exec_numb):
 def resulst_store(clips, exec_numb):
     pass
 
-def concat_and_write(clips, exec_numb):
-    write_data = time.strftime("%I%M%S")
-    print(write_data)
-    for i, clip in enumerate(clips):
-    	clips[i] = clips[i].resize( (1920, 1080) )
-    try:
-	    clipOut = concatenate_videoclips(clips, method='compose')
-	    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)
-    except Exception as e:
-        print(str(e))
-        print("An error occured, try {} times".format(exec_numb))
-        if exec_numb > 0:
-            exec_numb -= 1
-            cut_logic(exec_numb)
-        else:
-            print("game over")
-
 
 cut_logic(exec_numb)
