@@ -21,7 +21,7 @@ def test():
 def randclip(maxclips):
 	return random.randint(0, maxclips)
 
-def cut_logic(exec_numb):
+def cut_logic(exec_numb, path):
 	clips = []
 	print(clips)
 	clipsList = files_scanner_video(path)
@@ -39,13 +39,3 @@ def resulst_store(clips, exec_numb):
 	pass
 
 
-if __name__ == "__main__":
-	try:
-		path = sys.argv[1]
-		print(files_scanner_video(path))
-		exec_numb = 5
-		dur = []
-		cut_logic(exec_numb)
-	except IndexError as e:
-		# print(str(e))
-		print("please enter the path")

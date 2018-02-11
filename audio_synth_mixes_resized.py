@@ -19,20 +19,9 @@ def test():
 
 
 # =======================================================================OUT====================================
-# Better not to stor audio and video in same folder
-path = '../shaker/'
-pathAudio = '../audioShaker/'
-# print(files_scanner_video(path))
-exec_numb = 5
-
-dur = []
 
 
-def randclip(maxclips):
-    return random.randint(0, maxclips)
-
-
-def cut_logic(exec_numb):
+def cut_logic(exec_numb, path, pathAudio):
     pieces = []
     piecesAudio = []
     clipsList = files_scanner_video(path)
@@ -60,36 +49,11 @@ def cut_logic(exec_numb):
             # 
 	        pointer = random.randint(0, len(pieces) - 1)
 	        pointerAudio = piecesAudio[random.randint(0, len(piecesAudio) - 1)]
-	        # pieces[1] = time_symmetrize(pieces[1])
 	        pieces[pointer] = pieces[pointer].set_audio(pointerAudio)
 	        pointer = random.randint(0, len(pieces) - 1)
-	        # print(pointer)
-	        # print(clipsCounter)
-	        # print("Debug 4-07: ", pointer, pointerAudio)
-            # print(clips)
 
     concat_and_write(pieces, exec_numb)
 
 
 def resulst_store(clips, exec_numb):
     pass
-
-def concat_and_write(clips, exec_numb):
-    write_data = time.strftime("%I%M%S")
-    print(write_data)
-    for i, clip in enumerate(clips):
-    	clips[i] = clips[i].resize( (1280, 1024) )
-    try:
-	    clipOut = concatenate_videoclips(clips, method='compose')
-	    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)
-    except Exception as e:
-        print(str(e))
-        print("An error occured, try {} times".format(exec_numb))
-        if exec_numb > 0:
-            exec_numb -= 1
-            cut_logic(exec_numb)
-        else:
-            print("game over")
-
-
-cut_logic(exec_numb)

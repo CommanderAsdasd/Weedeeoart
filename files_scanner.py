@@ -2,6 +2,11 @@ from moviepy.editor import *
 from moviepy.video.fx.all import *
 import os
 import time
+import random
+import sys
+
+def randclip(maxclips):
+    return random.randint(0, maxclips)
 
 def files_scanner_video(path):
 	files = os.listdir(path)
@@ -42,13 +47,13 @@ def concat_and_write(clips, exec_numb):
     	clips[i] = clips[i].resize( (1920, 1080) )
     try:
 	    clipOut = concatenate_videoclips(clips, method='compose')
-	    clipOut.write_videofile("./output_video/" + write_data + "-out.mp4", fps=25)
+	    clipOut.write_videofile(sys.argv[1] + "/" + write_data + "-out.mp4", fps=25)
     except Exception as e:
         print(str(e))
         print("An error occured, try {} times".format(exec_numb))
         if exec_numb > 0:
             exec_numb -= 1
-            cut_logic(exec_numb)
+            # cut_logic(exec_numb)
         else:
             print("game over")
 
