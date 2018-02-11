@@ -7,6 +7,7 @@ import time
 
 from generate_sequence import *
 from files_scanner import *
+import sys
 
 class VideoEditor():
 	pass
@@ -16,7 +17,7 @@ def test():
 
 
 # =======================================================================OUT====================================
-path = '../shaker/'
+path = sys.argv[1]
 print(files_scanner_video(path))
 exec_numb = 5
 

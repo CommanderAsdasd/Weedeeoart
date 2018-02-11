@@ -18,6 +18,7 @@ import numpy as np
 import numpy
 import math
 import StringIO
+import sys
 
 # print(willWand)
 
@@ -31,8 +32,8 @@ def test():
 
 # =======================================================================OUT====================================
 # Better not to stor audio and video in same folder
-path = '../shaker/'
-pathAudio = '../audioShaker/'
+path = sys.argv[1]
+pathAudio = sys.argv[2]
 exec_numb = 5
 
 dur = []
