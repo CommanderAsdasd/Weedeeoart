@@ -34,10 +34,12 @@ class Videocringe():
         return tail or ntpath.basename(head)
 
     def write_video(self):
+        for i, sequence in enumerate(self.sequences):
+            self.sequences[i] = sequence.resize( (1920, 1080) )
         clipOut = concatenate_videoclips(self.sequences, method='compose')
         clipOut.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30)
 
 if __name__ == '__main__':
     editor = Videocringe(sys.argv[1])
-    editor.cut_video(1,3,4)
+    editor.cut_video(0.1,1,10)
     editor.write_video()
