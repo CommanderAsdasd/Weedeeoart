@@ -26,6 +26,7 @@ class Videocringe():
         for i in self.clips:
             for j in range(0,times):
                 self.sequences.append(Generator.rand_sequence(i))
+        random.shuffle(self.sequences)
         print(self.sequences)
 
     '''helper function for getting filename (or dirname) from path'''
