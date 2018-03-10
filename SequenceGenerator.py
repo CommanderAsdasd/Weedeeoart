@@ -25,3 +25,6 @@ class SequenceGenerator():
         print("Sequence is {}-{} ".format(start, end))
         sequence = clip.subclip(start, end)
         return sequence
+
+if __name__ == "__main__":
+    print("Use it in script!")
