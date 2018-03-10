@@ -5,9 +5,11 @@ from SequenceGenerator import *
 import os
 import sys
 import moviepy
+import ntpath
 
 class Videocringe():
-    '''main class of video cutter combine - defines how and how much video will be cringed'''
+    '''Main class of video cutter combine
+       Defines how and how much video will be cringed'''
 
     def __init__(self, path='./'):
         self.exec_numb = 5
@@ -26,9 +28,14 @@ class Videocringe():
                 self.sequences.append(Generator.rand_sequence(i))
         print(self.sequences)
 
+    '''helper function for getting filename (or dirname) from path'''
+    def get_filename(self):
+        head, tail = ntpath.split(self.path)
+        return tail or ntpath.basename(head)
+
     def write_video(self):
         clipOut = concatenate_videoclips(self.sequences, method='compose')
-        clipOut.write_videofile("./output_video/" + self.date + "-out.mp4", fps=30)
+        clipOut.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30)
 
 if __name__ == '__main__':
     editor = Videocringe(sys.argv[1])

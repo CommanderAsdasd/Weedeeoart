@@ -6,6 +6,7 @@ from moviepy.video.fx.all import *
 
 
 class SequenceGenerator():
+    '''Class for making sequences from video based on different parametes and check for corectness'''
 
     def __init__(self, minLength=1, maxLength=1, startPoint=0):
         self.minLength = minLength
