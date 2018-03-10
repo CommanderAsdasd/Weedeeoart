@@ -55,16 +55,15 @@ def generate_sequence(processClip, timecodes):
 	sequence = []
 	if (type(timecodes) != list):
 		raise Exception('sequence must be list of frames')
-
- 	duration = processClip.duration
+	duration = processClip.duration
 	for i, point in enumerate(timecodes[1::2]):
 		if point > duration:
 			point = duration
-		points.append(timecodes[i])
-		points.append(timecodes[i - 1])
-		print(points)
-		sequence.append(processClip.subclip(min(points), max(points)))
-		points = []		
+			points.append(timecodes[i])
+			points.append(timecodes[i - 1])
+			print(points)
+			sequence.append(processClip.subclip(min(points), max(points)))
+			points = []		
 	return sequence
 
 def generate_freeze(processClip, timecodes, times):

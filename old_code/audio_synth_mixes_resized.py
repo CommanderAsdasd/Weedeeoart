@@ -6,7 +6,7 @@ import random
 import time
 
 # from generate_sequence import *
-from refactor.generate_sequence import *
+from generate_sequence import *
 from files_scanner import *
 
 
@@ -33,13 +33,13 @@ def cut_logic(exec_numb, path, pathAudio):
     for i in range(0,2):
     	pieceLength = random.uniform(1, 2)
 
-    for i, objects in enumerate(clipsAudioList[::4]):
-    	for j in range(0, 2):
+    for i, objects in enumerate(clipsAudioList[::1]):
+    	for j in range(0, 3):
 	    	piecesAudio.append(generate_rand_sequence(clipsAudioList[randclip(clipsAudioCounter)], minLength=4, clipLength=pieceLength))
 
     	
-    for i, objects in enumerate(clipsList[::3]):
-        for j in range(0, 2):
+    for i, objects in enumerate(clipsList[::1]):
+        for j in range(0, 3):
         	pieces.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], minLength=4, clipLength=pieceLength))
         	# print(pieces)
         	# print(piecesAudio)

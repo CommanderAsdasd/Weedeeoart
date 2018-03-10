@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 # C:/Python27/python.exe
-# from moviepy.editor import *
-# from moviepy.video.fx.all import *
 import random
 import time
 import pip
@@ -25,8 +23,6 @@ def test():
 path = '../shaker/'
 print(files_scanner_video(path))
 exec_numb = 5
-
-# clips.append(generate_rand_sequence(clipsList[0], 5, 4))
 dur = []
 
 def randclip(maxclips):
@@ -38,15 +34,7 @@ def cut_logic(exec_numb):
 	clipsList = files_scanner_video(path)
 	clipsCounter = len(clipsList) - 1
 	for i, objects in enumerate(clipsList[::1]):
-		# clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
 		clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
-		
-		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
-		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 0, i + random.uniform(1, 2)))
-		# # clips.append(loop(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, 0.2), 5))
-		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
-		# clips.append(generate_rand_sequence(clipsList[randclip(clipsCounter)], 1, i + random.uniform(1, 4)))
-		# clips.append(generate_sequence(clipsList[randclip(clipsCounter)], [6.7, 6.8])
 	for i, objects in enumerate(clips):
 		clips[i] = fl_image()
 		# if i % 3 == 0:
@@ -108,13 +96,6 @@ def changeImage():
 
 
 
-# Значит где-то внутри generate_freeze теряется инстанс и превращается в число.
-
-# clip_in = generate_sequence(clip, 1.90)
-# clip_in2 = generate_sequence(clip2, 5)
-# print(clips)
-# print(clips[0])
-# clipOut.write_videofile("./" + write_data + "-out.avi",fps=25,codec='libx264',audio_codec='pcm_s16le')
 def concat_and_write(clips, exec_numb):
 	write_data = time.strftime("%I%M%S")
 	print(write_data)

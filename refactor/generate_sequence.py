@@ -6,12 +6,6 @@ from moviepy.video.fx.all import *
 
 
 def generate_rand_sequence_complicated(processClip, minLength=1, maxLength=1, startPoint=0):
-	"""Нет max_length, на больших видосах может выдавать огромные куски
-	Надо чтобы разница между точками была не меньше minLength, но не меньше maxLength
-	maxLength по определению не может быть больше длины клипа, поэтому длину куска надо сначала ограничить по maxLength
-	Он никогда не берёт куски дальше maxDuration, поэтому нужно измерять именно дельту между точками, то есть сравнивать две точки, если они меньше нужного отрезка - раздвигать расстояние, если больше - сужать. Но и min, и maxLength должны быть меньше длины клипа.
-	Да, а ещё я хотел приделать им стартовую точку, чтобы пропускать неинтересное начало например"""
-	# points = []
 	duration = processClip.duration
 	if maxLength > duration:
 		maxDuration = duration
@@ -35,11 +29,6 @@ def generate_rand_sequence_complicated(processClip, minLength=1, maxLength=1, st
 	return sequence
 
 def generate_rand_sequence_complicated(processClip, minLength=1, maxLength=1, startPoint=0):
-	# Не это бред какой-то. Будет 0 если они будут равны. Да и вообще, позволенная длина клипов - это всё множество Max за исключением Min
-	# Это должно ограничивать размер, но не стартовую точку. Поэтому значения генерятся на всём пространстве клипа за исключением startPoint, но их разность больше min и меньше max
-	# У меня получается две точки, которые я отсортировал, большую и меньшую. Надо придумать что делать если меньшая точка больше дюрейшена. Хотя это тупость, почему вообще хотя бы одна точка выходит за пределы клипа, когда я их генерю в пределах клипа?
-	# А можно пойти так - сначала рандомная точка, потом + minLength, если вот эта endPoint > duration, то смещаем startPoint на расстояние равное endPoint - duration, а endPoint = startPoint + duration
-	# Да у меня в старом варианте все клипы были фиксированной длины, а это не прикольно. По сути можно взять старый вариант, и сделать так, что оно будет в пределах этой длины
 	duration = processClip.duration
 	print(duration)
 	if (minLength > duration): # || maxLength < minLength || maxLength > duration) :

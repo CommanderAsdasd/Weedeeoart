@@ -39,3 +39,4 @@ def resulst_store(clips, exec_numb):
 	pass
 
 
+# такс

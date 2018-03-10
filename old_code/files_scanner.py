@@ -9,7 +9,8 @@ def randclip(maxclips):
     return random.randint(0, maxclips)
 
 def files_scanner_video(path):
-	files = os.listdir(path)
+	for i in os.listdir(path):
+		print(i)
 	filesList = []
 	sourceFile = []
 	for i, filenames in enumerate(os.listdir(path)):
