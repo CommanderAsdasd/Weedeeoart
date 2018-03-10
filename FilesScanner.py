@@ -6,7 +6,7 @@ import os
 import time
 import random
 import sys
-
+import re
 
 class FilesScanner():
 
@@ -19,20 +19,21 @@ class FilesScanner():
         return random.randint(0, maxclips)
 
     def scan_video(self):
+        formats = re.compile("mp4$|avi$")
         if (os.path.isdir(self.path)):
-            for i in os.listdir(self.path):
-                print(i)
-            for i, filenames in enumerate(os.listdir(self.path)):
-                self.filesList.append(VideoFileClip(os.path.join(self.path, filenames)))
+            for i, filename in enumerate(os.listdir(self.path)):
+                if (formats.match(filename.split(".")[-1])):
+                    print("Videofile", filename)
+                    self.filesList.append(VideoFileClip(os.path.join(self.path, filename)))
         else:
             self.filesList.append(VideoFileClip(self.path))
         return self.filesList
 
     def scan_audio(self):
+        formats = re.compile("wav$|mp3$")
         if (os.path.isdir(self.path)):
-            for i in os.listdir(self.path):
-                print(i)
             for i, filenames in enumerate(os.listdir(self.path)):
+                print("Audiofile", filename)
                 self.filesList.append(AudioFileClip(os.path.join(self.path, filenames)))
         else:
             self.filesList.append(AudioFileClip(self.path))
