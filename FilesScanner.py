@@ -19,7 +19,7 @@ class FilesScanner():
         return random.randint(0, maxclips)
 
     def scan_video(self):
-        formats = re.compile("mp4$|avi$")
+        formats = re.compile("mp4$|avi$|webm$")
         if (os.path.isdir(self.path)):
             for i, filename in enumerate(os.listdir(self.path)):
                 if (formats.match(filename.split(".")[-1])):

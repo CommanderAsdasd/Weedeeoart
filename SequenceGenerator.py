@@ -15,14 +15,14 @@ class SequenceGenerator():
 
     def rand_sequence(self, clip):	
         clipDuration = clip.duration
-        start = self.startPoint + random.uniform(0, clipDuration - 1)	
+        start = round(self.startPoint + random.uniform(0, clipDuration - 1), 4)	
         minL = self.minLength
         maxL = self.maxLength
         if self.maxLength > clipDuration:
             maxL = clipDuration
-        sequenceLength = random.uniform(minL, maxL - 1)
+        sequenceLength = round(random.uniform(minL, maxL - 1), 4)
         end = start + sequenceLength
-        print("Sequence is {}-{} ".format(start, end))
+        print("Sequence is {}-{} ".format(round(start, 4), round(end, 4)))
         sequence = clip.subclip(start, end)
         return sequence
 
