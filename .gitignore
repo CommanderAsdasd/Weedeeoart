@@ -1,6 +1,9 @@
 *mp3
 *mp4
+*wav
+*avi
 *venv*
+*sfk
 *__pycache__
 *pyc
 encoded/*
