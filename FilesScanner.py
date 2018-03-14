@@ -33,9 +33,10 @@ class FilesScanner():
     def scan_audio(self):
         formats = re.compile("wav$|mp3$")
         if (os.path.isdir(self.path)):
-            for i, filenames in enumerate(os.listdir(self.path)):
-                print("Audiofile", filename)
-                self.filesList.append(AudioFileClip(os.path.join(self.path, filenames)))
+            for i, filename in enumerate(os.listdir(self.path)):
+                if (formats.match(filename.split(".")[-1])):
+                    print("Audiofile", filename)
+                    self.filesList.append(AudioFileClip(os.path.join(self.path, filename)))
         else:
             self.filesList.append(AudioFileClip(self.path))
         return self.filesList
