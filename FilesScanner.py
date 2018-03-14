@@ -10,6 +10,7 @@ import re
 
 class FilesScanner():
 
+    # TODO loging
     def __init__(self, path):
         self.filesList = []
         self.sourceFile = []
@@ -19,7 +20,7 @@ class FilesScanner():
         return random.randint(0, maxclips)
 
     def scan_video(self):
-        formats = re.compile("mp4$|avi$|webm$")
+        formats = re.compile("mp4$|avi$|webm$|m2t$|gif$")
         if (os.path.isdir(self.path)):
             for i, filename in enumerate(os.listdir(self.path)):
                 if (formats.match(filename.split(".")[-1])):
