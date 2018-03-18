@@ -12,7 +12,8 @@ class FilesScanner():
 
     # TODO loging
     def __init__(self, path):
-        self.filesList = []
+        self.files_video = []
+        self.files_audio = []
         self.sourceFile = []
         self.path = path
 
@@ -25,10 +26,10 @@ class FilesScanner():
             for i, filename in enumerate(os.listdir(self.path)):
                 if (formats.match(filename.split(".")[-1])):
                     print("Videofile", filename)
-                    self.filesList.append(VideoFileClip(os.path.join(self.path, filename)))
+                    self.files_video.append(VideoFileClip(os.path.join(self.path, filename)))
         else:
-            self.filesList.append(VideoFileClip(self.path))
-        return self.filesList
+            self.files_video.append(VideoFileClip(self.path))
+        return self.files_video
 
     def scan_audio(self):
         formats = re.compile("wav$|mp3$")
@@ -36,10 +37,10 @@ class FilesScanner():
             for i, filename in enumerate(os.listdir(self.path)):
                 if (formats.match(filename.split(".")[-1])):
                     print("Audiofile", filename)
-                    self.filesList.append(AudioFileClip(os.path.join(self.path, filename)))
+                    self.files_audio.append(AudioFileClip(os.path.join(self.path, filename)))
         else:
-            self.filesList.append(AudioFileClip(self.path))
-        return self.filesList
+            self.files_audio.append(AudioFileClip(self.path))
+        return self.files_audio
 
     def files_scanner_images(path, dur):    
         if (os.path.isdir(self.path)):
