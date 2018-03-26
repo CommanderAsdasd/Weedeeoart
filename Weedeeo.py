@@ -192,7 +192,6 @@ if __name__ == '__main__':
             # editor.shuffle_audio(1,3,10)
             # editor.resize()
             # editor.write_audio()
-            editor.reshuffle()
             editor.write_video()
 
         def audio_preset():
@@ -202,7 +201,6 @@ if __name__ == '__main__':
             editor.speed_changer(minspeed=0.1, maxspeed=10, chance=80)
             editor.reverser(chance=75)
             editor.symmetrizer(chance=75)
-            editor.resize()
             editor.write_audio()
             # editor.write_video()
 
