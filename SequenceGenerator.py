@@ -16,7 +16,7 @@ class SequenceGenerator():
 
     def rand_sequence(self, clip):	
         clipDuration = clip.duration
-        start = round(self.startPoint + random.uniform(0, clipDuration - 1), 4)
+        start = round(self.startPoint + random.uniform(0, clipDuration - 2), 4)
         minL = self.minLength
         maxL = self.maxLength
         if self.maxLength > clipDuration:
