@@ -27,5 +27,9 @@ class SequenceGenerator():
         sequence = clip.subclip(start, end)
         return sequence
 
+    def sequence(self, clip, start, end):
+        sequence = clip.subclip(start, end)
+        return sequence
+
 if __name__ == "__main__":
     print("Use it in script!")
