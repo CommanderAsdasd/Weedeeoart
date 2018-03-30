@@ -34,10 +34,15 @@ class Writer():
         self.clipOut.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
         # except Exception as e:
             # self.counter -= 1
-        self.write_video()
                     
         # else:
         #     logging.info("No video available for write")
+
+    def wirte_video_separate(self):
+        self.date = time.strftime("%I%M%S")
+        self.resize()
+        for clip in self.sequences_video:
+            clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
 
 
 
@@ -46,6 +51,12 @@ class Writer():
         self.date = time.strftime("%I%M%S")
         clipOut = concatenate_audioclips(self.sequences_audio)
         clipOut.write_audiofile("./output_video/" + self.get_filename() + self.date + "-out.wav")
+
+    def wirte_audio_separate(self):
+        self.date = time.strftime("%I%M%S")
+        while clip in self.sequences_audio:
+            clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
+
 
     def write(self):
         pass
