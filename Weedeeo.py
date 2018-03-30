@@ -17,8 +17,8 @@ import moviepy.audio.fx.all as afx
 from math import *
 
 class Videocringe(Writer, Compose, TimeEffects, Mixing):
-    '''Main class of video cutter combine Defines how and how much video will be cringed. clips is original files, 
-    sequences is a internal chops of these media clips'''
+    '''Main class of video cutter combine Defines how and how much video will be cringed. Term 'Clips' is used for original files, 
+    sequences is a internal cuts of these media clips'''
 
     def __init__(self, path='./', logging='DEBUG'):
         Writer.__init__(self)
@@ -31,6 +31,8 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         self.path = path
         # self.clips = []
         self.Scanner = FilesScanner(self.path)
+        self.clips_video = self.Scanner.scan_video()
+        self.clips_audio = self.Scanner.scan_audio()
         self._logger()
         
 
@@ -44,8 +46,6 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         root.addHandler(ch)
 
     def shuffle_video(self, minLength=1, maxLength=1, times=1):
-        
-        self.clips_video = self.Scanner.scan_video()
         GeneratorVideo = SequenceGenerator(minLength, maxLength)
         for i in self.clips_video:
             for j in range(0,times):
@@ -54,8 +54,8 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         # logging.debug("Video is: {}".format(self.sequences_video))
 
     def shuffle_images(self, minLength=1, maxLength=1, times=1):
-        self.clips_video = self.Scanner.scan_images(maxLength)
         # logging.debug("images are: {}".format(self.clips_video))
+        self.clips_video.append(self.Scanner.scan_images(maxLength))
         GeneratorImages = SequenceGenerator(minLength, maxLength)
         for i in self.clips_video:
             for j in range(0,times):
@@ -63,8 +63,6 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         random.shuffle(self.sequences_video)
 
     def shuffle_audio(self, minLength=1, maxLength=1, times=1):
-        
-        self.clips_audio = self.Scanner.scan_audio()
         # logging.debug(self.clips_audio)
         GeneratorAudio = SequenceGenerator(minLength, maxLength)
         for i in self.clips_audio:
@@ -74,10 +72,8 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         random.shuffle(self.sequences_audio)
         # logging.debug("Audio is: {}".format(self.sequences_audio))
 
-    def chop_video(self, timecodes):
-        if (hasattr(self, 'sequences_video')):
-            self.clips_video = self.Scanner.scan_video()
-            self.sequences_video = []
+    def chop_sequences(self, timecodes):
+        if (len(self.sequences_video)>0):
             with open(timecodes) as chopFile:
                 chopStr = chopFile.read()
                 chopData = json.loads(chopStr)
@@ -85,6 +81,23 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
             for i in self.clips_video:
                 for start, end in chopData.items():
                     self.sequences_video.insert(0,GeneratorVideo.sequence(i, start, end))
+                # print(start, end)
+
+    def chop_clips(self, timecodes):
+        # if (hasattr(self, 'sequences_video')):
+        if (len(self.clips_video)>0):
+            clips_video_chop = []
+            with open(timecodes) as chopFile:
+                chopStr = chopFile.read()
+                chopData = json.loads(chopStr)
+            GeneratorVideo = SequenceGenerator()
+            for i, clip in enumerate(self.clips_video):
+                for start, end in chopData.items():
+                    try:
+                        clips_video_chop.append(GeneratorVideo.sequence(clip, start, end))
+                    except Exception as e:
+                        logging.info("An error in function {} occured: '{}'".format(sys._getframe().f_code.co_name, e))
+            self.clips_video = clips_video_chop
                 # print(start, end)
 
 
@@ -110,23 +123,27 @@ if __name__ == '__main__':
             # editor = None
             editor = Videocringe(sys.argv[1])
             # editor.shuffle_images(0.1,0.3,5)
-            # editor.chop_video('./chop.json')
+            # editor.chop_sequences('./chop.json')
+            editor.chop_clips('./hackery_oldfags.json')
+            editor.shuffle_video(1,3,1)
             # editor.shuffle_video(1,3,2) # cool 1-second preset
-            editor.shuffle_video(1,3,5)
             # editor.time_warper(80)
             # editor.clips_wall(chance=50)
-            editor.shuffle_audio(1,3,1)
+            # editor.shuffle_audio(1,3,1)
             # editor.uncareful_mixing(chance=75)
             editor.careful_mixing(chance=25)
-            # editor.speed_changer(minspeed=0.1, maxspeed=10, chance=80)
+            editor.speed_changer(minspeed=0.5, maxspeed=3, chance=80)
             editor.reverser(chance=75)
-            editor.symmetrizer(chance=75)
-            # editor.shuffle_video(1,2,10)
-            # editor.shuffle_audio(1,3,10)
+            try:
+                editor.symmetrizer(chance=75)
+            except Exception as e:
+                logging.debug("can't symmetrize, error is \"{}\"".format(e))
+            editor.shuffle_video(1,2,10)
+            editor.shuffle_audio(1,3,10)
             # editor.write_audio()
             editor.reshuffle()
-            # editor.write_video()
-            editor.wirte_video_separate()
+            editor.write_video()
+            # editor.wirte_video_separate()
             # editor.wirte_audio_separate()
 
         def audio_preset():

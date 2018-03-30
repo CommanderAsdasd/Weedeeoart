@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+import logging
 
 class Mixing():
 
@@ -9,13 +10,13 @@ class Mixing():
     def careful_mixing(self, chance=50):
         '''this method randmoly choose item from sequences_audio and append it to sequences_video due to chance variable.
         Audio/video sync'''
-        if (hasattr(self, 'sequences_audio')) and (hasattr(self, 'sequences_video')):
+        # if (hasattr(self, 'sequences_audio')) and (hasattr(self, 'sequences_video')):
+        if (len(self.sequences_audio) > 0) and (len(self.sequences_audio) > 0):
             sequences_video = self.sequences_video
             sequences_audio = self.sequences_audio
             for i, pointerVideo in enumerate(self.sequences_video):
                 if random.randint(0,100) <= chance:
                     pointerAudio = random.choice(sequences_audio)
-                    print('DEBUG pointer is point on audio:', pointerAudio)
                     video_duration, audio_duration = sequences_video[i].duration, pointerAudio.duration
                     # How to rewrite it to .set_end
                     if video_duration > audio_duration:
@@ -29,7 +30,8 @@ class Mixing():
 
     def uncareful_mixing(self, chance=50):
         '''Audio/video async'''
-        if (hasattr(self, 'sequences_audio')) and (hasattr(self, 'sequences_video')):
+        # if (hasattr(self, 'sequences_audio')) and (hasattr(self, 'sequences_video')):
+        if (len(self.sequences_audio) > 0) and (len(self.sequences_audio) > 0):
             sequences_video = self.sequences_video
             sequences_audio = self.sequences_audio
             for i, pointerVideo in enumerate(self.sequences_video):
