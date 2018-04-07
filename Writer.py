@@ -4,11 +4,13 @@ from moviepy.video.fx.all import *
 import ntpath
 import logging
 import time
+import random
 
 class Writer():
     '''Helper class to write video'''
     def __init__(self):
         self.counter = 5 #debugging option
+        self.name = "_OUT.avi"
 
     def get_filename(self):
         head, tail = ntpath.split(self.path)
@@ -22,14 +24,20 @@ class Writer():
         except Exception as NoVideoError:
             logging.info("Error occured, \n {}".format(NoVideoError))
 
+    def write(self, clip):
+        # clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
+        clip.write_videofile("./output_video/" + self.get_filename() + self.date + self.name, codec='libx264')
 
     def write_video(self):
+        self.name = '_OUT.avi'
         # if (hasattr(self, 'sequences_video')):
             # while (self.counter > 0):
         self.date = time.strftime("%I%M%S")
-        self.resize()
-        # try:
-        clipOut = concatenate_videoclips(self.sequences_video, method='compose')
+        self.resize() # ITS IMPORTANT!
+        logging.debug("Chopped {} and altered {} sequences".format(self.sequences_video, self.sequences_altered))
+        sequences_concatenated = self.sequences_video + self.sequences_altered
+        logging.debug("Videos will be writed: {}".format(sequences_concatenated))
+        clipOut = concatenate_videoclips(sequences_concatenated, method='compose')
         # self.clipOut.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
         self.write(clipOut)
         # except Exception as e:
@@ -40,12 +48,13 @@ class Writer():
 
     def wirte_video_separate(self):
         '''no audio for now'''
-        self.date = time.strftime("%I%M%S")
-        self.resize()
-        for clip in self.sequences_video:
+        self.name = "_SEPARATE.avi"
+        # self.resize()
+        sequences_shuffled = self.sequences_video + self.sequences_altered
+        random.shuffle(sequences_shuffled)
+        for clip in sequences_shuffled:
+            self.date = time.strftime("%I%M%S")
             self.write(clip)
-
-
 
     def write_audio(self):
         '''writes only audio'''
@@ -58,7 +67,3 @@ class Writer():
         while clip in self.sequences_audio:
             clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.wav")
 
-
-    def write(self, clip):
-        # clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
-        clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='libvorbis')

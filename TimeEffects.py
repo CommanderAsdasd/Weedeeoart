@@ -10,6 +10,17 @@ class TimeEffects():
     def __init__(self):
         pass
 
+    def test_sequences_exists(function, *kwargs):
+        def video(self, *kwargs): 
+            if (len(self.clips_video)):
+                function()
+        def audio(self, *kwargs):
+            if (len(self.clips_audio)):
+                function()
+        return video
+
+    # @test_sequences_exists[0]
+    # @test_sequences_exists
     def reverser(self, chance=50):
         '''reverses_the_clips'''
         
@@ -22,7 +33,25 @@ class TimeEffects():
                 if random.randint(0,100) <= chance:
                     self.sequences_video[i] = time_mirror(pointerVideo)
         if not (hasattr(self, 'sequences_audio')) and not (hasattr(self, 'sequences_video')):
-            logging.info("no video and audio sequences provided") 
+            logging.info("no video and audio sequences provided")
+
+    def reverser_sas(self, time=1, chance=50):
+        '''reverses_the_clips'''
+        
+        if hasattr(self, 'sequences_audio'):
+            for i, pointerAudio in enumerate(self.sequences_audio):
+                if random.randint(0,100) <= chance:
+                    sas_video = self.sequences_audio[i].subclip(0,-time)
+                    sas_video = time_mirror(pointerAudio)
+                    self.sequences_audio[i].append(sas_video)
+        if hasattr(self, 'sequences_video'):
+            for i, pointerVideo in enumerate(self.sequences_video):
+                if random.randint(0,100) <= chance:
+                    sas_clip = self.sequences_audio[i].subclip(0,-time)
+                    self.sequences_video[i].append(time_mirror(pointerVideo))
+        if not (hasattr(self, 'sequences_audio')) and not (hasattr(self, 'sequences_video')):
+            logging.info("no video and audio sequences provided")
+
 
     def symmetrizer(self, chance=50):
         '''reverses_the_clips. Currently not implement audio'''
