@@ -10,7 +10,7 @@ def video_preset(editor, times=1):
 	        # editor.chop_sequences('./chop.json')
 	        # editor.chop_clips('./jsons/kaput.json')
         # editor.shuffle_video(0.5,0.9,5)
-        editor.shuffle_video(0.1,0.5,50)
+        editor.shuffle_video(1,2,1)
         # editor.compose_for_transitions_4(chance=100)
         # editor.compose_for_transitions_2(chance=100)
 	        # editor.shuffle_video(1,3,2) # cool 1-second preset

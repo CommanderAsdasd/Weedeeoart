@@ -47,7 +47,7 @@ class Writer():
         #     logging.info("No video available for write")
 
     def wirte_video_separate(self):
-        '''no audio for now'''
+
         self.name = "_SEPARATE.avi"
         # self.resize()
         sequences_shuffled = self.sequences_video + self.sequences_altered

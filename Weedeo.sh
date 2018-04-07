@@ -1,1 +1,1 @@
-python3 /f/git/Videocringe/videocringe.py $1
+python3 Gui-tk.py

@@ -5,36 +5,56 @@ from SequenceGenerator import *
 from Writer import *
 from Compose import * 
 from TimeEffects import *
+from ImageEffects import *
 from Mixing import *
+from math import *
+from moviepy.video.fx.all import *
 import os
 import sys
 import moviepy
 import logging
 import random
 import json
-from moviepy.video.fx.all import *
 import moviepy.audio.fx.all as afx
-from math import *
+import multiprocessing
+from itertools import product
 
-class Videocringe(Writer, Compose, TimeEffects, Mixing):
+
+class Weedeeo(FilesScanner, Writer, Compose, TimeEffects, ImageEffects, Mixing):
     '''Main class of video cutter combine Defines how and how much video will be cringed. Term 'Clips' is used for original files, 
     sequences is a internal cuts of these media clips'''
 
-    def __init__(self, path='./', logging='DEBUG'):
-        Writer.__init__(self)
+    def __init__(self, path='./', logging='DEBUG', scantype = 'default'):
         Compose.__init__(self)
         Mixing.__init__(self)
+        ImageEffects.__init__(self)
         self.sequences_video = []
         self.sequences_audio = []
-        
+        # self.clips_video = []
         self.exec_numb = 5
         self.path = path
         # self.clips = []
         self.Scanner = FilesScanner(self.path)
-        self.clips_video = self.Scanner.scan_video()
-        self.clips_audio = self.Scanner.scan_audio()
         self._logger()
+        if scantype =="recur":
+            self._scan_recur()
+        elif scantype == "default":
+            self._scan_default()
+    
+    def _scan_recur(self):
+        self.Scanner.random_iterative_crawler()
         
+
+    def _scan_default(self):
+        # self.clips_video = self.Scanner.scan_video()
+        # self.clips_audio = self.Scanner.scan_audio()
+        pass
+
+    def _count_clips():
+    	return len(self.clips_video)
+
+    def _count_sequences(self):
+    	return len(self.sequences_video)
 
     def _logger(self):
         root = logging.getLogger()
@@ -47,7 +67,7 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
 
     def shuffle_video(self, minLength=1, maxLength=1, times=1):
         GeneratorVideo = SequenceGenerator(minLength, maxLength)
-        for i in self.clips_video:
+        for i in self.Scanner.clips_video:
             for j in range(0,times):
                 self.sequences_video.append(GeneratorVideo.rand_sequence(i))
         random.shuffle(self.sequences_video)
@@ -108,60 +128,13 @@ class Videocringe(Writer, Compose, TimeEffects, Mixing):
         #         self.sequences_audio[i] = pointerAudio.
     
     def reshuffle(self):
-        if hasattr(self, 'sequences_video'):
+        if len(self.sequences_video) != 0:
             random.shuffle(self.sequences_video)
-        if hasattr(self, 'sequences_audio'):
+        if len(self.sequences_audio) != 0:
             random.shuffle(self.sequences_video)
+        # if len(self.sequences_audio) != 0:
+        #     self.sequences_altered + self.sequences_video)
         
     def invert_green_blue(self):
         pass
 
-if __name__ == '__main__':
-    i = 1
-    try:
-        def video_preset():
-            # editor = None
-            editor = Videocringe(sys.argv[1])
-            # editor.shuffle_images(0.1,0.3,5)
-            # editor.chop_sequences('./chop.json')
-            editor.chop_clips('./hackery_oldfags.json')
-            editor.shuffle_video(1,3,1)
-            # editor.shuffle_video(1,3,2) # cool 1-second preset
-            # editor.time_warper(80)
-            # editor.clips_wall(chance=50)
-            # editor.shuffle_audio(1,3,1)
-            # editor.uncareful_mixing(chance=75)
-            editor.careful_mixing(chance=25)
-            editor.speed_changer(minspeed=0.5, maxspeed=3, chance=80)
-            editor.reverser(chance=75)
-            try:
-                editor.symmetrizer(chance=75)
-            except Exception as e:
-                logging.debug("can't symmetrize, error is \"{}\"".format(e))
-            editor.shuffle_video(1,2,10)
-            editor.shuffle_audio(1,3,10)
-            # editor.write_audio()
-            editor.reshuffle()
-            editor.write_video()
-            # editor.wirte_video_separate()
-            # editor.wirte_audio_separate()
-
-        def audio_preset():
-            editor = Videocringe(sys.argv[1])
-            editor.shuffle_audio(0.2,1,20)
-            editor.shuffle_audio(1,2,10)
-            editor.speed_changer(minspeed=0.1, maxspeed=10, chance=80)
-            editor.reverser(chance=75)
-            editor.symmetrizer(chance=75)
-            editor.write_audio()
-            # editor.write_video()
-
-        video_preset()
-    except Exception as e:
-        if i >= 0: 
-            print("Error occured")
-            print(str(e))
-            i -= 1
-            video_preset()
-        else:
-            print("Exit")
