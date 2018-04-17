@@ -1,1 +1,1 @@
-python3 Gui-tk.py
+./venv/Scripts/python Gui-tk.py

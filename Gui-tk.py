@@ -30,10 +30,10 @@ class GUI(Weedeeo):
         #     self.lowerBound = int(min(self.insert_bound1.get(), self.insert_bound2.get()))
         #     self.upperBound = int(max(self.insert_bound1.get(), self.insert_bound2.get()))
         self.clipPath = self.entry.get()
-        editor1 = Weedeeo(self.clipPath, scantype='recur')
+        
         # try:
             # audio_preset(editor1)
-        preset.video_preset(editor1, times)
+        preset.video_preset(self.clipPath, times=times)
         # except Exception as e:
         #     pass
         

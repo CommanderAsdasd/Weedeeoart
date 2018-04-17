@@ -44,8 +44,10 @@ class FilesScanner():
 
     def add_video(self, path):
         # if (formats.match(filename.split(".")[-1])):
-        # logging.info("Videofile {}".format(path))
-        self.clips_video.append(VideoFileClip(path))
+        try:
+            self.clips_video.append(VideoFileClip(path))
+        except Exception as e:
+            logging.debug("Can't add videofile, error: {}".format(e))
         #os.path.join(self.path, filename)
 
     def scan_audio(self):
