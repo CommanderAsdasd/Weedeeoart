@@ -15,31 +15,41 @@ class ImageEffects():
         self.filters = ["BLUR", "CONTOUR", "DETAIL", "EDGE_ENHANCE", "EDGE_ENHANCE_MORE", "EMBOSS", "FIND_EDGES", "SMOOTH", "SMOOTH_MORE", "SHARPEN"]
         self.choosen_filter = None
 
+
     def _filter(self, inpImage):
-        logging.debug("Trying to apply filter: {}".format(choosen_filter))
+        logging.debug("Trying to apply filter: {}".format(self.choosen_filter))
         if not self.choosen_filter:
             im_array = inpImage
-            choosen_filter = getattr(ImageFilter, self.choosen_filter)
+            self.choosen_filter = getattr(ImageFilter, self.choosen_filter)
             inpImage = Image.fromarray(inpImage, 'RGB')
             inpImage = inpImage.filter(randFilter)
-            imArr = numpy.fromstring(inpImage.tobytes(), dtype=np.uint8)
+            imArr = np.fromstring(inpImage.tobytes(), dtype=np.uint8)
             imArr = imArr.reshape((inpImage.size[1], inpImage.size[0], 3))
-            logging.debug("Filter applied: {}".format(choosen_filter))
+            logging.debug("Filter applied: {}".format(self.choosen_filter))
             return imArr
         else:
             logging.info("No correct filter choosed, current value is " + self.choosen_filter)
 
-    def _filter_frame_rand(self):
+    def _filter_frame_rand(self, inpImage):
         '''randomly chooses filter every frame'''
         im_array = inpImage
-        randFilter = getattr(ImageFilter, random.choice(filters))
-        logging.info("Using random filter "+ randFilter)
+        randFilter = getattr(ImageFilter, random.choice(self.filters))
+        logging.info("Using random filter "+ str(randFilter))
         inpImage = Image.fromarray(inpImage, 'RGB')
         inpImage = inpImage.filter(randFilter)
-        imArr = numpy.fromstring(inpImage.tobytes(), dtype=np.uint8)
+        imArr = np.fromstring(inpImage.tobytes(), dtype=np.uint8)
         imArr = imArr.reshape((inpImage.size[1], inpImage.size[0], 3))
-        logging.debug("Filter applied: {}".format(choosen_filter))
         return imArr
+
+    def _set_duration_shortest(self, clips):
+        clip_durations = []
+        for clip in clips:
+            clip_durations.append(clip.duration)
+        min_duration = min(clip_durations)
+        for clip in clips:
+            if clip.duration > min_duration:
+                logging.debug("set {} to {} duration".format(clip, clip.duration))
+                clip.set_duration(min_duration)
 
     def set_filter(self, filter_name=""):
         change_flag = 0
@@ -53,21 +63,40 @@ class ImageEffects():
 
 
     def apply_filter(self, chance=0):
-        for clip in self.sequences_video:
+        for i, clip in enumerate(self.sequences_video):
             if random.randint(0,100) <= chance:
                 logging.info("Use filter "+ self.choosen_filter)
                 self.sequences_video[i] = clip.fl_image(_filter)
 
     def apply_filter_framerand(self, chance=50):
-        for clip in self.sequences_video:
+        for i, clip in enumerate(self.sequences_video):
             if random.randint(0,100) <= chance:
-                self.sequences_video[i] = clip.fl_image(_filter_frame_rand)
+                self.sequences_video[i] = clip.fl_image(self._filter_frame_rand)
 
 
     def take_stills(self):
         pass
 
+    def opacity_mixing(self, chance=50, separate=True, opacity=0.5):
+        if hasattr(self, 'sequences_video'):
+            for i, pointerVideo in enumerate(self.sequences_video):
+                if random.randint(0,100) <= chance:
+                    immediate_clip1 = self.sequences_video[i]
+                    immediate_clip2 = random.choice(self.sequences_video)
+                    self._set_duration_shortest(clips=[immediate_clip1, immediate_clip2])
+                    if separate:
+                        self.sequences_altered.append(CompositeVideoClip([immediate_clip1, immediate_clip2.resize(width=immediate_clip1.w, height=immediate_clip1.h).set_opacity(opacity)]))
+                    else:
+                        self.sequences_video[i] = CompositeVideoClip([immediate_clip1, immediate_clip2.set_opacity(opacity)])
+
+    def random_compoziting(self):
+        pass
+
+
+
     def compose_for_transitions_2(self, chance=50, separate=True):
+        '''separate appends resulting video to another list, if set to False composed video may be taken for composing again, cool fractals resulting'''
+
         if hasattr(self, 'sequences_video'):
             for i, pointerVideo in enumerate(self.sequences_video):
                 if random.randint(0,100) <= chance:

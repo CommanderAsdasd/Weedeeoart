@@ -39,6 +39,7 @@ class GUI(VideoProcess):
 
 
     def button_go_callback(self):
+
         # try:
         #     self.lowerBound = int(min(self.insert_bound1.get(), self.insert_bound2.get()))
         #     self.upperBound = int(max(self.insert_bound1.get(), self.insert_bound2.get()))

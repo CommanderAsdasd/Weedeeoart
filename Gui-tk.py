@@ -33,7 +33,7 @@ class GUI(Weedeeo):
         
         # try:
             # audio_preset(editor1)
-        preset.video_preset(self.clipPath, times=times)
+        preset.preset_manager(self.clipPath, times=times)
         # except Exception as e:
         #     pass
         

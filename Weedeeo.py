@@ -30,10 +30,8 @@ class Weedeeo(FilesScanner, Writer, Compose, TimeEffects, ImageEffects, Mixing):
         ImageEffects.__init__(self)
         self.sequences_video = []
         self.sequences_audio = []
-        # self.clips_video = []
         self.exec_numb = 5
         self.path = path
-        # self.clips = []
         self.Scanner = FilesScanner(self.path)
         self._logger()
         if scantype =="recur":

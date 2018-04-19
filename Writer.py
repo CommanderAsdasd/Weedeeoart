@@ -16,11 +16,11 @@ class Writer():
         head, tail = ntpath.split(self.path)
         return tail or ntpath.basename(head)
 
-    def resize(self):
+    def resize(self, size):
         '''writes only video, resizing it to 1920x1080 size'''
         try:
             for i, sequence in enumerate(self.sequences_video):
-                self.sequences_video[i] = sequence.resize( (1920, 1080) )
+                self.sequences_video[i] = sequence.resize( size )
         except Exception as NoVideoError:
             logging.info("Error occured, \n {}".format(NoVideoError))
 
@@ -28,12 +28,12 @@ class Writer():
         # clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
         clip.write_videofile("./output_video/" + self.get_filename() + self.date + self.name, codec='libx264')
 
-    def write_video(self):
+    def write_video(self, size=(1920, 1080)):
         self.name = '_OUT.avi'
         # if (hasattr(self, 'sequences_video')):
             # while (self.counter > 0):
         self.date = time.strftime("%I%M%S")
-        self.resize() # ITS IMPORTANT!
+        self.resize(size)
         logging.debug("Chopped {} and altered {} sequences".format(self.sequences_video, self.sequences_altered))
         sequences_concatenated = self.sequences_video + self.sequences_altered
         logging.debug("Videos will be writed: {}".format(sequences_concatenated))
