@@ -24,7 +24,7 @@ class Weedeeo(FilesScanner, Writer, Compose, TimeEffects, ImageEffects, Mixing):
     '''Main class of video cutter combine Defines how and how much video will be cringed. Term 'Clips' is used for original files, 
     sequences is a internal cuts of these media clips'''
 
-    def __init__(self, path='./', logging='DEBUG', scantype = 'default'):
+    def __init__(self, path='./', logging='DEBUG', scantype = 'default', sources_count=5):
         Compose.__init__(self)
         Mixing.__init__(self)
         ImageEffects.__init__(self)
@@ -32,7 +32,7 @@ class Weedeeo(FilesScanner, Writer, Compose, TimeEffects, ImageEffects, Mixing):
         self.sequences_audio = []
         self.exec_numb = 5
         self.path = path
-        self.Scanner = FilesScanner(self.path)
+        self.Scanner = FilesScanner(self.path, sources_count)
         self._logger()
         if scantype =="recur":
             self._scan_recur()
@@ -40,7 +40,7 @@ class Weedeeo(FilesScanner, Writer, Compose, TimeEffects, ImageEffects, Mixing):
             self._scan_default()
     
     def _scan_recur(self):
-        self.Scanner.random_iterative_crawler()
+        self.Scanner.random_crawler()
         
 
     def _scan_default(self):

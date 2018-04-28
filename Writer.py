@@ -37,9 +37,12 @@ class Writer():
         logging.debug("Chopped {} and altered {} sequences".format(self.sequences_video, self.sequences_altered))
         sequences_concatenated = self.sequences_video + self.sequences_altered
         logging.debug("Videos will be writed: {}".format(sequences_concatenated))
-        clipOut = concatenate_videoclips(sequences_concatenated, method='compose')
+        if len(sequences_concatenated) != 0:
+            clipOut = concatenate_videoclips(sequences_concatenated, method='compose')
+            self.write(clipOut)
+        else:
+            logging.info("Output file list is empty")
         # self.clipOut.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
-        self.write(clipOut)
         # except Exception as e:
             # self.counter -= 1
                     

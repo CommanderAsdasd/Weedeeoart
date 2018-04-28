@@ -9,14 +9,31 @@ def preset_manager(clipPath, times=1):
         random_shortz(clipPath)
 
 def random_shortz(clipPath):
-    Editor = Weedeeo(clipPath, scantype='recur')
-    Editor.shuffle_video(1,2,2)
-    Editor.apply_filter_framerand()
-    Editor.opacity_mixing(opacity=0.5)
+    Editor = Weedeeo(clipPath, scantype='recur', sources_count=1)
+    Editor.shuffle_video(0.5,1,4)
+    # Editor.apply_filter_framerand()
+    Editor.opacity_mixing(opacity=0.7, separate=False)
+    # Editor.compose_for_transitions_2(chance=50, separate=False)
+    # Editor.set_filter(filter_name="EMBOSS")
+    Editor.apply_filter(chance=10)
+    try:
+        Editor.symmetrizer(chance=75)
+    except Exception as e:
+        logging.debug("can't symmetrize effects, error is \"{}\"".format(e))
+    # try:
+    #     Editor.speed_changer(minspeed=0.8, maxspeed=1.5, chance=50)
+    # except Exception as e:
+    #     logging.debug("can't speed change, error is \"{}\"".format(e))
+    try:
+        Editor.reverser_sas(chance=100, time=0.5)
+    except Exception as e:
+        logging.debug("can't reverser_sas, error is \"{}\"".format(e))
+    try:
+        Editor.reverser()
+    except Exception as e:
+        logging.debug("can't reverse, error is \"{}\"".format(e))
     Editor.reshuffle()
-    Editor.set_filter(filter_name="CONTOUR")
-    Editor.apply_filter()
-    Editor.write_video(size=(1280, 720))
+    Editor.write_video(size=(640, 320))
 
 def video_preset(clipPath):
     Editor = Weedeeo(clipPath, scantype='recur')
