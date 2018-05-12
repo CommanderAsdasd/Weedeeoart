@@ -5,13 +5,12 @@ At this moment it takes all video formats that can find in specified folders, br
 
 # Using
 
-* python Gui-tk.py
-* python preset.py 'F:\path\to\folder'
+* ./main.py gui
+* ./main.py preset.py 'F:\path\to\video\folder'
 
 # TODO
 * Serialized pipeline configs instead of presed.py (JSON or YAML)
 * Full description based on docstrings
-* Console interface (click, argparse or so)
 * Further GUI developing
 * Dockerify app
 * Web based interface and image gallery (Django?)
