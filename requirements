@@ -32,3 +32,4 @@ virtualenv==15.1.0
 Wand==0.4.4
 wcwidth==0.1.7
 win-unicode-console==0.5
+SciPy

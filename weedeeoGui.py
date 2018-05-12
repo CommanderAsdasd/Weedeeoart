@@ -85,4 +85,4 @@ class GUI(Weedeeo):
         mainloop()
 
 if __name__ == "__main__":
-    WeedeeoGui = GUI()
+    print('use \'main.py gui\' instead')

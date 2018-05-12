@@ -5,6 +5,7 @@ import ntpath
 import logging
 import time
 import random
+import os
 
 class Writer():
     '''Helper class to write video'''
@@ -25,6 +26,8 @@ class Writer():
             logging.info("Error occured, \n {}".format(NoVideoError))
 
     def write(self, clip):
+        if not os.path.exists("./output_video/"):
+            os.makedirs("./output_video/")
         # clip.write_videofile("./output_video/" + self.get_filename() + self.date + "-out.mp4", fps=30, codec='libx264', audio_codec='aac')
         clip.write_videofile("./output_video/" + self.get_filename() + self.date + self.name, codec='libx264')
 

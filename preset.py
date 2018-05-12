@@ -4,11 +4,12 @@
 from Weedeeo import *
 
 
-def preset_manager(clipPath, times=1):
-    for i in range(times):
+def preset_manager(clipPath, count):
+    for i in range(count):
         random_shortz(clipPath)
 
 def random_shortz(clipPath):
+<<<<<<< Updated upstream
     Editor = Weedeeo(clipPath, scantype='recur', sources_count=1)
     Editor.shuffle_video(0.5,1,4)
     # Editor.apply_filter_framerand()
@@ -34,6 +35,17 @@ def random_shortz(clipPath):
         logging.debug("can't reverse, error is \"{}\"".format(e))
     Editor.reshuffle()
     Editor.write_video(size=(640, 320))
+=======
+    Editor = Weedeeo(clipPath, scantype='recur')
+    Editor.shuffle_video(1,2,2)
+    # Editor.apply_filter_framerand()
+    Editor.opacity_mixing(opacity=0.5)
+    Editor.reshuffle()
+    # Editor.set_filter(filter_name="CONTOUR")
+    Editor.apply_filter()
+    Editor.write_video(size=(1280, 720))
+    Editor.compose_for_transitions_2(chance=40)
+>>>>>>> Stashed changes
 
 def video_preset(clipPath):
     Editor = Weedeeo(clipPath, scantype='recur')
@@ -93,4 +105,5 @@ def audio_preset(editor):
     # editor.write_video()
 
 if __name__ == '__main__':
-    preset_manager(sys.argv[1])
+    # preset_manager(sys.argv[1])
+    print('use main.py instead')
